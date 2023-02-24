@@ -5,7 +5,9 @@
 </template>
 
 <script>
+/* eslint-disable */
 import EventCard from '@/components/EventCard.vue'
+import EventService from '@/services/EventService.js'
 
 export default {
   name: 'EventList',
@@ -14,53 +16,17 @@ export default {
   },
   data() {
     return {
-      events: [
-        {
-          id: 123456,
-          category: 'animal welfare',
-          title: 'Cat Adoption Day',
-          description: 'Find your new feline at this event',
-          location: 'Tehran',
-          date: 'November 28, 2022',
-          time: '12:00',
-          petsAllowed: true,
-          organizer: 'Kat Laydee',
-        },
-        {
-          id: 123456,
-          category: 'animal welfare',
-          title: 'Cat Adoption Day',
-          description: 'Find your new feline at this event',
-          location: 'Tehran',
-          date: 'November 28, 2022',
-          time: '12:00',
-          petsAllowed: true,
-          organizer: 'Kat Laydee',
-        },
-        {
-          id: 123456,
-          category: 'animal welfare',
-          title: 'Cat Adoption Day',
-          description: 'Find your new feline at this event',
-          location: 'Tehran',
-          date: 'November 28, 2022',
-          time: '12:00',
-          petsAllowed: true,
-          organizer: 'Kat Laydee',
-        },
-        {
-          id: 123456,
-          category: 'animal welfare',
-          title: 'Cat Adoption Day',
-          description: 'Find your new feline at this event',
-          location: 'Tehran',
-          date: 'November 28, 2022',
-          time: '12:00',
-          petsAllowed: true,
-          organizer: 'Kat Laydee',
-        },
-      ],
+      events: null,
     }
+  },
+  created() {
+    EventService.getEvents()
+      .then((response) => {
+        this.events = response.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
 }
 </script>
